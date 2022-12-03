@@ -1,0 +1,21 @@
+{
+    "name": "project-reviews",
+    "scripts": {
+        "dev": "parcel src/index.html",
+        "build": "parcel build src/index.html",
+        "format": "prettier --write ."
+    },
+    "devDependencies": {
+        "parcel": "^2.8.0",
+        "parcel-reporter-static-files-copy": "^1.4.0",
+        "prettier": "2.8.0"
+    },
+    "dependencies": {
+        "@parcel/transformer-sass": "^2.8.0",
+        "sass": "^1.56.1"
+    },
+    "staticFiles": {
+        "staticPath": "images",
+        "staticOutPath": "images"
+    }
+}

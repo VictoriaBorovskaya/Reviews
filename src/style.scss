@@ -1,0 +1,122 @@
+$font-stack: "Ubuntu", sans-serif;
+$color-light-gray: #f1f5f8;
+$color-dark-gray: #617d98;
+$color-primary-blue: #49a6e9;
+$color-light-blue: #c5e5fc;
+$color-dark-blue: #8bcbf9;
+$offset: 5px;
+
+@mixin image {
+    width: 120px;
+    height: 120px;
+}
+
+@mixin flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+body {
+    background-color: $color-light-gray;
+    height: 100vh;
+    box-sizing: border-box;
+    font-family: $font-stack;
+}
+
+.content-container {
+    max-width: 1024px;
+    margin: 0 auto;
+    height: 100%;
+    @include flex-container;
+
+    .title {
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    .border-title {
+        height: $offset;
+        width: 100px;
+        background-color: $color-primary-blue;
+        margin: 10px 0 70px 0;
+    }
+}
+
+.reviews {
+    gap: 20px;
+    @include flex-container;
+}
+
+.review {
+    @include flex-container;
+    width: 60%;
+    background-color: white;
+    padding: 20px 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.247);
+    border-radius: $offset;
+    gap: 20px;
+
+    &__image_container {
+        @include image;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 5px solid $color-primary-blue;
+
+        .icon {
+            width: 23px;
+            height: 23px;
+            border-radius: 50%;
+            border: 5px solid $color-primary-blue;
+            background-color: $color-primary-blue;
+            position: absolute;
+        }
+
+        .image {
+            @include image;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    &__name_container {
+        @include flex-container;
+        gap: 10px;
+
+        .name {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .profession {
+            color: $color-primary-blue;
+        }
+    }
+
+    &__text {
+        line-height: 1.5;
+        text-align: center;
+        font-size: 16px;
+        color: $color-dark-gray;
+    }
+
+    &__button {
+        border: none;
+        background-color: white;
+    }
+
+    &__button_surprise {
+        border: none;
+        background-color: $color-light-blue;
+        color: $color-primary-blue;
+        padding: $offset;
+        border-radius: $offset;
+
+        &:hover {
+            background-color: $color-primary-blue;
+            color: black;
+            transition: 0.5s;
+        }
+    }
+}
