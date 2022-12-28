@@ -1,92 +1,179 @@
 $font-stack: "Ubuntu", sans-serif;
+$color-black: #243a52;
+$color-white: white;
 $color-light-gray: #f1f5f8;
 $color-dark-gray: #617d98;
 $color-primary-blue: #49a6e9;
 $color-light-blue: #c5e5fc;
 $color-dark-blue: #8bcbf9;
-$offset: 5px;
+$offset-5: 5px;
+$offset-10: 10px;
+$offset-20: 20px;
 
-@mixin image {
+//служебные классы с помощью @extend (шаблонные селекторы)
+%flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+%justify-align-center {
+    justify-content: center;
+    align-items: center;
+}
+
+%ttl {
+    font-weight: 700;
+    text-align: center;
+    color: $color-black;
+}
+
+%btn {
+    background-color: $color-light-blue;
+    color: $color-primary-blue;
+    border: none;
+    border-radius: $offset-5;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+%btn-hover {
+    background-color: $color-primary-blue;
+    color: $color-black;
+    transition: 0.5s;
+}
+
+%img-size {
     width: 120px;
     height: 120px;
 }
 
-@mixin flex-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
+// основные классы
 body {
     background-color: $color-light-gray;
-    height: 100vh;
     box-sizing: border-box;
     font-family: $font-stack;
 }
 
 .content-container {
-    max-width: 1024px;
-    margin: 0 auto;
-    height: 100%;
-    @include flex-container;
+    max-width: 800px;
+    padding: 0px $offset-10;
+    margin: 100px auto;
+    @extend %flex-column;
+    @extend %justify-align-center;
 
     .title {
         font-size: 36px;
-        font-weight: 700;
+        padding-top: $offset-20;
+        @extend %ttl;
     }
 
     .border-title {
-        height: $offset;
+        height: $offset-5;
         width: 100px;
         background-color: $color-primary-blue;
-        margin: 10px 0 70px 0;
+        margin: $offset-10 0 70px 0;
+    }
+
+    .button_container {
+        display: flex;
+        width: 100%;
+        margin: 50px 0px;
+        gap: $offset-20;
+        justify-content: space-between;
+
+        .button {
+            @extend %btn;
+            width: 40%;
+            padding: 7px $offset-10;
+
+            &:hover {
+                @extend %btn-hover;
+                scale: 1.1;
+            }
+
+            @media (max-width: 425px) {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 425px) {
+            flex-direction: column-reverse;
+        }
+    }
+
+    @media (max-width: 425px) {
+        margin: $offset-20 auto;
     }
 }
 
 .reviews {
-    gap: 20px;
-    @include flex-container;
+    gap: $offset-20;
+    @extend %flex-column;
+    @extend %justify-align-center;
 }
 
 .review {
-    @include flex-container;
-    width: 60%;
-    background-color: white;
-    padding: 20px 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.247);
-    border-radius: $offset;
-    gap: 20px;
+    display: flex;
+    @extend %justify-align-center;
+    background-color: $color-white;
+    padding: $offset-20 30px;
+    box-shadow: 0 $offset-5 15px rgba(0, 0, 0, 0.247);
+    border-radius: $offset-5;
+    gap: $offset-20;
+
+    &__button {
+        border: none;
+        background-color: white;
+        cursor: pointer;
+        scale: 1.1;
+
+        &:hover {
+            transition: 0.5s;
+            scale: 1.2;
+        }
+
+        @media (max-width: 500px) {
+            transform: rotate(90deg);
+        }
+    }
+
+    .content_container {
+        @extend %flex-column;
+        @extend %justify-align-center;
+        gap: 15px;
+    }
 
     &__image_container {
-        @include image;
+        @extend %img-size;
         border-radius: 50%;
         overflow: hidden;
-        border: 5px solid $color-primary-blue;
+        border: $offset-5 solid $color-primary-blue;
 
         .icon {
             width: 23px;
             height: 23px;
             border-radius: 50%;
-            border: 5px solid $color-primary-blue;
+            border: $offset-5 solid $color-primary-blue;
             background-color: $color-primary-blue;
             position: absolute;
         }
 
         .image {
-            @include image;
+            @extend %img-size;
             object-fit: cover;
             object-position: center;
         }
     }
 
     &__name_container {
-        @include flex-container;
-        gap: 10px;
+        @extend %flex-column;
+        @extend %justify-align-center;
+        gap: $offset-10;
 
         .name {
             font-size: 18px;
             font-weight: 700;
+            color: $color-black;
         }
 
         .profession {
@@ -101,22 +188,98 @@ body {
         color: $color-dark-gray;
     }
 
-    &__button {
-        border: none;
-        background-color: white;
-    }
-
     &__button_surprise {
-        border: none;
-        background-color: $color-light-blue;
-        color: $color-primary-blue;
-        padding: $offset;
-        border-radius: $offset;
+        @extend %btn;
+        padding: $offset-5 $offset-10;
 
         &:hover {
-            background-color: $color-primary-blue;
-            color: black;
-            transition: 0.5s;
+            @extend %btn-hover;
+            scale: 1.1;
+        }
+    }
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+    }
+}
+
+.add-modal {
+    background-color: #617d98ad;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    &-container {
+        @extend %flex-column;
+        width: 50%;
+        background-color: white;
+        border-radius: $offset-5;
+        gap: $offset-20;
+        padding: 50px;
+
+        .input-container {
+            @extend %flex-column;
+            gap: $offset-5;
+            width: 100%;
+
+            .label {
+                color: $color-black;
+                font-size: 16px;
+            }
+
+            .text-client {
+                font-size: 12px;
+                color: $color-black;
+            }
+
+            .input {
+                font-size: 14px;
+                border: 1px solid $color-primary-blue;
+                outline: none;
+                border-radius: $offset-5;
+                padding: 5px;
+                color: $color-black;
+                height: 22px;
+
+                &:focus {
+                    border: 2px solid $color-primary-blue;
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            width: 60%;
+            padding: 30px;
+        }
+
+        @media (max-width: 425px) {
+            width: 80%;
+            padding: $offset-20;
+        }
+    }
+
+    &-title {
+        font-size: 30px;
+        @extend %ttl;
+    }
+
+    &-button {
+        @extend %btn;
+        padding: 7px;
+        font-size: 16px;
+        margin: $offset-10 0;
+
+        &:hover {
+            @extend %btn-hover;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 14px;
         }
     }
 }

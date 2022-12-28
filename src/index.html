@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <title>Reviews</title>
+        <link rel="icon" type="image/png" href="/images/icon-review.png" />
         <link rel="stylesheet" type="text/css" href="reset.css" />
         <link rel="stylesheet" type="text/css" href="style.scss" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,10 +17,59 @@
 
     <body>
         <div class="content-container">
-            <h1 class="title">Our Reviews</h1>
+            <h1 class="title">Ваши отзывы</h1>
             <div class="border-title"></div>
-            <div class="reviews" id="reviews"></div>
+            <div class="reviews" id="reviews-container"></div>
+            <div class="button_container">
+                <button class="button">Вернуться на главную страницу</button>
+                <button class="button" id="add-review-button">
+                    Оставить отзыв
+                </button>
+            </div>
         </div>
-        <script src="app.js"></script>
+
+        <div class="add-modal" id="add-modal">
+            <div class="add-modal-container">
+                <p class="add-modal-title">Оставить отзыв</p>
+                <div class="input-container">
+                    <p class="label">Ваше имя</p>
+                    <input id="name" class="input" />
+                </div>
+                <div class="input-container">
+                    <p class="label">Дожность в компании</p>
+                    <p class="text-client">
+                        *Если Вы являетесь нашим клиентом, оставьте поле пустым
+                    </p>
+                    <input id="profession" class="input" />
+                </div>
+                <div class="input-container">
+                    <p class="label">Ваш отзыв</p>
+                    <textarea id="text" class="input input-text"></textarea>
+                </div>
+                <div class="input-container">
+                    <p class="label">При желании можете прикрепить свое фото</p>
+                    <input id="file-input" type="file" class="input" />
+                </div>
+                <div class="input-container">
+                    <button class="add-modal-button" id="close-button">
+                        Отмена
+                    </button>
+                    <button class="add-modal-button" id="add-button">
+                        Оставить отзыв
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="add-modal" id="add-modal-thanks">
+            <div class="add-modal-container">
+                <p class="add-modal-title">Спасибо за Ваш отзыв!</p>
+                <button id="ok-button" class="add-modal-button">Ок</button>
+            </div>
+        </div>
+
+        <script type="module" src="./js/script.js"></script>
+        <script type="module" src="./js/addData.js"></script>
+        
     </body>
 </html>
